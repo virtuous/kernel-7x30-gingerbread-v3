@@ -1807,3 +1807,11 @@ config MSM7X30_DDR2
 	bool "Request max ebi1 at max cpu frequency"
 	depends on ARCH_MSM7X30
 	default n
+
+config VIRTUOUS_OVERCLOCK
+        bool "Virtuous overclocking mode"
+        default n
+        depends on CPU_FREQ && !PERFLOCK
+        depends on ARCH_QSD8X50 || ARCH_MSM7X30 || ARCH_MSM7X00A || ARCH_MSM7227 || ARCH_MSM7225
+        help
+         Enable support for higher overclocked frequencies.
