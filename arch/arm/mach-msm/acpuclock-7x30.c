@@ -80,80 +80,86 @@ struct clkctl_acpu_speed {
 static struct clock_state drv_state = { 0 };
 
 static struct cpufreq_frequency_table freq_table[] = {
-	{ 0, 245760 },
-	{ 1, 368640 },
-	{ 2, 768000 },
-#if defined(CONFIG_MACH_SPADE) || defined(CONFIG_MACH_GLACIER)
-	{ 3, 1017600 },
-	{ 4, 1113600 },
-	{ 5, 1209600 },
-	{ 6, 1305600 },
-	{ 7, 1401600 },
-	{ 8, 1516800 },
-#ifndef CONFIG_JESUS_PHONE
-	{ 9, CPUFREQ_TABLE_END },
+                { 0, 245760 },
+                { 1, 368640 },
+                { 2, 476160 },
+                { 3, 599040 },
+                { 4, 691200 },
+                { 5, 806400 },
+                { 6, 902400 },
+                { 7, 998400 },
+#ifndef CONFIG_VIRTUOUS_OVERCLOCK
+                { 8, CPUFREQ_TABLE_END },
 #else
-	/* Just an example of some of the insanity I was able to pull off on my
-	   device */
-	{ 9, 1612800 },
-	{ 10, 1708800 },
-	{ 11, 1804800 },
-	{ 12, CPUFREQ_TABLE_END },
-#endif
-#else
-	{ 3, 806400 },
-	{ 4, 1017600 },
-	{ 5, 1113600 },
-	{ 6, 1209600 },
-	{ 7, 1305600 },
-	{ 8, 1401600 },
-	{ 9, 1516800 },
-#ifndef CONFIG_JESUS_PHONE
-	{ 10, CPUFREQ_TABLE_END },
-#else
-	/* Just an example of some of the insanity I was able to pull off on my
-	   device */
-	{ 10, 1612800 },
-	{ 11, 1708800 },
-	{ 12, 1804800 },
-	{ 13, CPUFREQ_TABLE_END },
-#endif
+                { 8, 1094400 },
+                { 9, 1152000 },
+                { 10, 1209600 },
+                { 11, 1305600 },
+                { 12, 1401600 },
+                { 13, 1497600 },
+                { 14, 1516800 },
+                { 15, CPUFREQ_TABLE_END },
 #endif
 };
 
 /* Use negative numbers for sources that can't be enabled/disabled */
 #define SRC_LPXO (-2)
 #define SRC_AXI  (-1)
+
 static struct clkctl_acpu_speed acpu_freq_tbl[] = {
-	{ 24576,  SRC_LPXO, 0, 0,  30720,  850, VDD_RAW(850) },
-	{ 61440,  PLL_3,    5, 11, 61440,  900, VDD_RAW(900) },
-	{ 122880, PLL_3,    5, 5,  61440,  900, VDD_RAW(900) },
-	{ 184320, PLL_3,    5, 4,  61440,  900, VDD_RAW(900) },
-	{ MAX_AXI_KHZ, SRC_AXI, 1, 0, 61440, 900, VDD_RAW(900) },
-	{ 245760, PLL_3,    5, 2,  61440,  900, VDD_RAW(900) },
-	{ 368640, PLL_3,    5, 1,  122800, 950, VDD_RAW(950) },
-	{ 768000, PLL_1,    2, 0,  153600, 1025, VDD_RAW(1025) },
-	/* Make sure any freq based from PLL_2 is a multiple of 19200! 
-	   Voltage tables are being very conservative and are not designed to
-	   be an undervolt of any sort. */
-#if defined(CONFIG_MACH_SPADE) || defined(CONFIG_MACH_GLACIER)
-	{ 1017600, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
-#else
-	{ 806400, PLL_2,    3, 0,  192000, 1050, VDD_RAW(1050) },
-	{ 1017600, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
-#endif
-	{ 1113600, PLL_2,   3, 0,  192000, 1100, VDD_RAW(1100) },
-	{ 1209600, PLL_2,   3, 0,  192000, 1150, VDD_RAW(1150) },
-	{ 1305600, PLL_2,   3, 0,  192000, 1200, VDD_RAW(1200) },
-	{ 1401600, PLL_2,   3, 0,  192000, 1250, VDD_RAW(1250) },
-	{ 1516800, PLL_2,   3, 0,  192000, 1300, VDD_RAW(1300) },
-#ifdef CONFIG_JESUS_PHONE
-	{ 1612800, PLL_2,   3, 0,  192000, 1400, VDD_RAW(1400) },
-	{ 1708800, PLL_2,   3, 0,  192000, 1400, VDD_RAW(1400) },
-	{ 1804800, PLL_2,   3, 0,  192000, 1450, VDD_RAW(1450) },
-#endif
-	{ 0 }
+                { 24576,  SRC_LPXO, 0, 0,  30720,  850, VDD_RAW(850) },
+                { 61440,  PLL_3,    5, 11, 61440,  900, VDD_RAW(900) },
+                { 122880, PLL_3,    5, 5,  61440,  950, VDD_RAW(950) },
+                { 184320, PLL_3,    5, 4,  61440,  975, VDD_RAW(975) },
+                { MAX_AXI_KHZ, SRC_AXI, 1, 0, 61440, 1000, VDD_RAW(1000) },
+                { 245760, PLL_3,    5, 2,  61440,  1000, VDD_RAW(1000) },
+                { 368640, PLL_3,    5, 1,  122800, 1000, VDD_RAW(1000) },
+                { 476160, PLL_1,    2, 0,  153600, 1025, VDD_RAW(1025) },
+                { 599040, PLL_1,    2, 0,  153600, 1025, VDD_RAW(1025) },
+                { 691200, PLL_1,    2, 0,  153600, 1025, VDD_RAW(1025) },
+                { 768000, PLL_1,    2, 0,  153600, 1025, VDD_RAW(1025) },
+                /* Make sure any freq based from PLL_2 is a multiple of 19200! */
+                { 806400, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 825600, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 844800, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 864000, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 883200, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 902400, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 921600, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 940800, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 960000, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 979200, PLL_2,    3, 0,  192000, 1025, VDD_RAW(1025) },
+                { 998400, PLL_2,    3, 0,  192000, 1050, VDD_RAW(1050) },
+                { 1017600, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
+                { 1036800, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
+                { 1056000, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
+                { 1075200, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
+                { 1094400, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
+                { 1113600, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
+                { 1132800, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
+                { 1152000, PLL_2,   3, 0,  192000, 1075, VDD_RAW(1075) },
+                { 1171200, PLL_2,   3, 0,  192000, 1100, VDD_RAW(1100) },
+                { 1190400, PLL_2,   3, 0,  192000, 1125, VDD_RAW(1125) },
+                { 1209600, PLL_2,   3, 0,  192000, 1150, VDD_RAW(1150) },
+                { 1228800, PLL_2,   3, 0,  192000, 1150, VDD_RAW(1150) },
+                { 1248000, PLL_2,   3, 0,  192000, 1150, VDD_RAW(1150) },
+                { 1267200, PLL_2,   3, 0,  192000, 1150, VDD_RAW(1150) },
+                { 1286400, PLL_2,   3, 0,  192000, 1150, VDD_RAW(1175) },
+                { 1305600, PLL_2,   3, 0,  192000, 1175, VDD_RAW(1175) },
+                { 1324800, PLL_2,   3, 0,  192000, 1175, VDD_RAW(1175) },
+                { 1344000, PLL_2,   3, 0,  192000, 1175, VDD_RAW(1175) },
+                { 1363200, PLL_2,   3, 0,  192000, 1200, VDD_RAW(1200) },
+                { 1382400, PLL_2,   3, 0,  192000, 1225, VDD_RAW(1225) },
+                { 1401600, PLL_2,   3, 0,  192000, 1250, VDD_RAW(1250) },
+                { 1420800, PLL_2,   3, 0,  192000, 1250, VDD_RAW(1250) },
+                { 1440000, PLL_2,   3, 0,  192000, 1250, VDD_RAW(1250) },
+                { 1459200, PLL_2,   3, 0,  192000, 1250, VDD_RAW(1250) },
+                { 1478400, PLL_2,   3, 0,  192000, 1275, VDD_RAW(1275) },
+                { 1497600, PLL_2,   3, 0,  192000, 1300, VDD_RAW(1300) },
+                { 1516800, PLL_2,   3, 0,  192000, 1300, VDD_RAW(1300) },
+                { 0 }
 };
+
 static unsigned long max_axi_rate;
 
 #define POWER_COLLAPSE_HZ (MAX_AXI_KHZ * 1000)
