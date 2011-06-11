@@ -9,13 +9,13 @@ on emmc
 	mount ext4 emmc@system /system ro noatime nodiratime
     devwait emmc@userdata
         exec /system/bin/e2fsck_recvy -p emmc@userdata
-	mount ext4 emmc@userdata /data noatime nodiratime nosuid nodev noauto_da_alloc nodelalloc
+	mount ext4 emmc@userdata /data noatime nodiratime nosuid nodev noauto_da_alloc
     devwait emmc@cache
 	exec /system/bin/e2fsck_recvy -p emmc@cache
-	mount ext4 emmc@cache /cache noatime nodiratime nosuid nodev noauto_da_alloc nodelalloc
+	mount ext4 emmc@cache /cache noatime nodiratime nosuid nodev noauto_da_alloc
     devwait emmc@devlog
 	exec /system/bin/e2fsck_recvy -p emmc@devlog
-	mount ext4 emmc@devlog /devlog noatime nodiratime nosuid nodev noauto_da_alloc nodelalloc
+	mount ext4 emmc@devlog /devlog noatime nodiratime nosuid nodev noauto_da_alloc
 
 on early-init
     device mtd@misc 0460 radio diag
