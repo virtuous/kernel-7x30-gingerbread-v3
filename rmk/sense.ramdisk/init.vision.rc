@@ -26,6 +26,8 @@ on init
     chmod 0700 /devlog
 
 on boot
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
@@ -39,6 +41,7 @@ on boot
     # bluetooth MAC address programming
     chown bluetooth bluetooth /sys/module/board_vision/parameters/bdaddr
     setprop ro.bt.bdaddr_path /sys/module/board_vision/parameters/bdaddr
+
     # bluetooth car dock pin
     chown system system /sys/class/switch/dock/bt_pin
 
@@ -60,6 +63,7 @@ on boot
     chown system system /sys/class/leds/jogball-backlight/period
     chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/class/leds/lcd-backlight/brightness
+
     #set radio_feedback permissions
     chown radio radio /dev/radio_feedback
     chmod 0660 /dev/radio_feedback
