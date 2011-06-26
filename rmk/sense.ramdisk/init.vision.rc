@@ -78,6 +78,11 @@ service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     disabled
     oneshot
 
+# Doubleshot uses a different service name -rmk
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
+    disabled
+    oneshot
+
 service dhcpcd /system/bin/dhcpcd -ABKL eth0
     disabled
     oneshot
